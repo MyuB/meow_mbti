@@ -58,8 +58,6 @@ const Question = () => {
     }
   };
 
-  console.log(totalScore);
-
   return (
     <Wrapper>
       <ProgressBar
