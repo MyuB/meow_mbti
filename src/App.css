@@ -1,0 +1,8 @@
+.App {
+  font-family: "BMHANNA";
+}
+
+@font-face {
+  font-family: "BMHANNA";
+  src: url(/src/assets/fonts/BMHANNA_11yrs_ttf.ttf);
+}

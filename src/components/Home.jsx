@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import PangImage from "../assets/ggompang.jpeg";
 import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -13,6 +14,7 @@ const Contents = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  font-family: "BMHANNA";
 `;
 
 const Header = styled.div`
@@ -20,6 +22,7 @@ const Header = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: "BMHANNA";
 `;
 
 const Title = styled.div`
@@ -37,6 +40,12 @@ const Desc = styled.div`
 `;
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const handleClickButton = () => {
+    navigate("/question");
+  };
+
   return (
     <Wrapper>
       <Header>예비 집사 판별기</Header>
@@ -52,7 +61,7 @@ const Home = () => {
           ></img>
         </LogoImage>
         <Desc>MBTI를 기반으로 하는 나랑 잘 맞는 고양이 찾기</Desc>
-        <Button>테스트 시작하기</Button>
+        <Button onClick={handleClickButton}>테스트 시작하기</Button>
       </Contents>
     </Wrapper>
   );
