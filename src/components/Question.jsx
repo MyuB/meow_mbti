@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { ProgressBar, Button } from "react-bootstrap";
 import { QuestionData } from "../assets/data/QuestionData";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, createSearchParams } from "react-router-dom";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -40,26 +40,21 @@ const Question = () => {
     );
 
     setTotalScore(newScore);
-    // if (type === "EI") {
-    //   const addScore = totalScore[0].score + n;
-    //   const newObject = { id: "EI", score: addScore };
-    //   totalScore.splice(0, 1, newObject);
-    // } else if (type === "SN") {
-    //   const addScore = totalScore[1].score + n;
-    //   const newObject = { id: "EI", score: addScore };
-    //   totalScore.splice(1, 1, newObject);
-    // } else if (type === "TF") {
-    //   const addScore = totalScore[2].score + n;
-    //   const newObject = { id: "EI", score: addScore };
-    //   totalScore.splice(2, 1, newObject);
-    // } else {
-    //   const addScore = totalScore[3].score + n;
-    //   const newObject = { id: "EI", score: addScore };
-    //   totalScore.splice(3, 1, newObject);
-    // }
+
     if (QuestionData.length !== questionNo + 1) setQuestionNo(questionNo + 1);
     else {
-      navigate("/result");
+      const mbti = newScore.reduce(
+        (acc, curr) =>
+          acc +
+          (curr.score >= 2 ? curr.id.substring(0, 1) : curr.id.substring(1, 2)),
+        ""
+      );
+      navigate({
+        pathname: "/result",
+        search: `?${createSearchParams({
+          mbti: mbti,
+        })}`,
+      });
     }
   };
 

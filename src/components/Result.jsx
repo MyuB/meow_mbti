@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import PangImage from "../assets/ggompang.jpeg";
 import Button from "react-bootstrap/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { ResultData } from "../assets/data/ResultData";
 
 const Wrapper = styled.div`
@@ -41,6 +40,16 @@ const Desc = styled.div`
 `;
 const Result = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const mbti = searchParams.get("mbti");
+  const [resultData, setResultData] = useState({});
+
+  useEffect(() => {
+    const result = ResultData.find((s) => s.best === mbti);
+    setResultData(result);
+  }, [mbti]);
+
+  console.log(resultData);
 
   return (
     <Wrapper>
@@ -49,14 +58,14 @@ const Result = () => {
         <Title>결과 보기</Title>
         <LogoImage>
           <img
-            src={ResultData[0].image}
+            src={resultData.image}
             className="rounded-circle"
             width={350}
             height={350}
             alt={""}
           ></img>
         </LogoImage>
-        <Desc>예비 집사님과 찰떡궁합인 고양이는 {ResultData[0].name}/</Desc>
+        <Desc>예비 집사님과 찰떡궁합인 고양이는 {resultData.name}</Desc>
         <Button onClick={() => navigate("/")}>테스트 다시하기</Button>
       </Contents>
     </Wrapper>
